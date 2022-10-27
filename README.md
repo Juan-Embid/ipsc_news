@@ -1,2 +1,2 @@
-# ipsc_news
+# IPSC NEWS
 Spanish IPSC Telegram Bot News
