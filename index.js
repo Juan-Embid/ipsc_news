@@ -1,14 +1,16 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
 const fs = require("fs").promises;
+const path = require("path");
+const dotenv = require("dotenv")
+dotenv.config()
 
-// [] que se imprima fecha y descripcion
-// [] que lea de archivo y escriba en archivo el id
+
 
 var savedData = [];
 const DELAY = 10 * 60; // seconds
 const url = "https://fmto.net/noticias/ipsc"
-const filename = "./idArticles.json";
+const filename = path.join(__dirname,"idArticles.json");
 
 const writeFile = () => fs.writeFile(filename, JSON.stringify(savedData), 'utf-8').catch(err => console.log(err));
 
@@ -30,8 +32,8 @@ const sleep = (seconds) => new Promise((resolve) => setTimeout(resolve, seconds 
 
 
 async function sendTelegram(article) {
-    const apiKey = "5707930390:AAHNP3HyFkQ28c32OKuNkfQzYFO_YOpcG9g";
-    const channelName = "@ipsc_news";
+    const apiKey = process.env.TG_API_KEY;
+    const channelName = process.env.TG_CHAT_ID;
 
     /*     var text = `*Nueva Noticia!*
     [${article.name}](${article.url})
