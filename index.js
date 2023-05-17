@@ -8,8 +8,8 @@ dotenv.config()
 
 
 var savedData = [];
-const DELAY = 10 * 60; // seconds
-const url = "https://fmto.net/noticias/ipsc"
+const DELAY = 30 * 60; // seconds
+const url = "https://fmto.net/noticias/"
 const filename = path.join(__dirname,"idArticles.json");
 
 const writeFile = () => fs.writeFile(filename, JSON.stringify(savedData), 'utf-8').catch(err => console.log(err));
@@ -91,12 +91,12 @@ async function getArticles() {
             const title = $(this).find("div.article-header > h2 > a")
             const url = `https://fmto.net${title.attr('href')}`
             const name = title.text()
-            const id = url.split('ipsc/')[1].split('-')[0]
+            const id = url.split('noticias/')[1].split('-')[0]
 
             // const dateTimeText = dateTime.text()
             // document.querySelector("#tm-content > div.uk-grid.tm-leading-article > div > article > div.tm-article-date.uk-text-center.uk-align-left.uk-visible-large > div:nth-child(1) > span")
             let description = '';
-            $(this).find('div.article-introtext > p').each(function () {
+            $(this).find('div.articleBody > p').each(function () {
                 description += $(this).text().trim() + '\n';
             });
 
